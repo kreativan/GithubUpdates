@@ -5,7 +5,7 @@ You can use public or private repo for updates.
 If you use private repo, in module settings along side with github user name and repository name, you need to add a personal access token.    
 It's up to you how you handle the updates, usualy it's just copy paste files.
 
-* Create `vendor.json` to your processwire tempaltes folder, and in updates repo root. This files will be compared when checking for updates.
+* Create `vendor.json` to your processwire templates folder, and add the same file to updates repo root folder. This files will be compared when checking for updates.
 * Create `updates.php` file in updates repo root. This file will be executed when triggering updates.
 
 
