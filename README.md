@@ -1,16 +1,26 @@
 # GithubUpdates
 
-*Processwire module* to download and install updates using github repo.   
+**Processwire module** to download and install updates using github repo.   
 You can use public or private repo for updates.    
 If you use private repo, in module settings along side with github user name and repository name, you need to add a personal access token.    
-On install module will execute `update.php` file from the update repo.     
 It's up to you how you handle the updates, usualy it's just copy paste files.
 
-You need two files:
-* vendor.json - in templates folder and in repo
-* updates.php - in repo
+* Create `vendor.json` to your processwire tempaltes folder, and in updates repo root. This files will be compared when checking for updates.
+* Create `updates.php` file in updates repo root. This file will be executed when triggering updates.
 
-vendor.json
+
+Repo structure example:
+```
+|- update.php
+|- vendor.json
+	|- /inc/
+	|- /site/
+		|- /classes/
+		|- /modules/
+		|- /templates/
+```
+
+**vendor.json**
 ```
 {
   "project": "My Project Name",
@@ -19,10 +29,11 @@ vendor.json
 }
 ```
 
-update.php
+**update.php**
 ```
 # In this example we copy everything from repo /site/ folder to your processwire /site/ folder... 
-# In /inc/ folder, you can create custom update scripts that will be executed automatically during the install.
+# In /inc/ folder, you can create custom update scripts that will be executed automatically during the install.    
+
 <?php
 /**
  *  Copy files from updates folder to template folder
