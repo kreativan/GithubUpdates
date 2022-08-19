@@ -15,9 +15,9 @@ Repo structure example:
 |- vendor.json
 |- /inc/
 |- /site/
-	|- /classes/
-	|- /modules/
-	|- /templates/
+  |- /classes/
+  |- /modules/
+  |- /templates/
 ```
 
 **vendor.json**
@@ -46,7 +46,7 @@ $this->message("Files copy finished.");
 
 /**
  *  We are splitting all our updates as files (scripts) stored in /inc/ folder.
- *  Install files it will be automatically included and executed.
+ *  Install files will be automatically included and executed.
  */
 $inc_dir = $this->updates_dir . "inc/";
 $inc = scandir($inc_dir);
@@ -60,7 +60,7 @@ foreach($inc as $php) {
 $this->message("All update files executed");
 
 // Last update timestamp
-$this->wirekit->saveModule("GithubUpdates", [
+$this->modules->saveModuleConfigData("GithubUpdates", [
   "last_update" => time()
 ]);
 
