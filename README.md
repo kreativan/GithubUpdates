@@ -13,11 +13,11 @@ Repo structure example:
 ```
 |- update.php
 |- vendor.json
-	|- /inc/
-	|- /site/
-		|- /classes/
-		|- /modules/
-		|- /templates/
+|- /inc/
+|- /site/
+	|- /classes/
+	|- /modules/
+	|- /templates/
 ```
 
 **vendor.json**
