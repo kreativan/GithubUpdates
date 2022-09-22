@@ -22,7 +22,7 @@ class GithubUpdates extends Process {
       'user' => $this->github_user,
       'repo' => $this->github_repo,
       'token' => $this->github_token,
-      "json_folder" => "site/templates/vendor.json",
+      "json_folder" => "vendor.json",
       'current_version' => "{$this->vendor_version}",
       'pending_version' => "{$this->getUpdateInfo("version")}",
       'debug' => wire("config")->debug ? true : false,
