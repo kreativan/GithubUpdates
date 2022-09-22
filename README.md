@@ -28,7 +28,7 @@ Repo structure example:
 }
 ```
 
-**github-updates.php**
+### github-updates.php
 This file is optional, it will be executed on updates install, if missing, module `$this->installUpdate()` method will be executed instead.    
 `$this->installUpdate()` will simply copy base folders (modules, classes, templates) and files (vendor.json, ready.php, init.php and finished.php).     
 So, if you want to add your own custom logic, use `github-updates.php` file...
