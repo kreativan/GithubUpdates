@@ -6,14 +6,13 @@ If you use private repo, in module settings along side with github user name and
 It's up to you how you handle the updates, usualy it's just copy paste files.
 
 * Create `vendor.json` to your processwire templates folder, and add the same file to updates repo root folder. This files will be compared when checking for updates.
-* Create `updates.php` file in updates repo root. This file will be executed when triggering updates.
+* Optionaly, create `github-updates.php` file in updates repo root. This file will be executed when triggering updates.
 
 
 Repo structure example:
 ```
-|- update.php
+|- github-updates.php
 |- vendor.json
-|- /inc/
 |- /site/
   |- /classes/
   |- /modules/
@@ -23,17 +22,21 @@ Repo structure example:
 **vendor.json**
 ```
 {
+  "vendor: "kreativan.dev",
   "project": "My Project Name",
   "version": "0.0.1",
   "website": "kreativan.dev"
 }
 ```
 
-**update.php**
-```
-# In this example we copy everything from repo /site/ folder to your processwire /site/ folder... 
-# In /inc/ folder, you can create custom update scripts that will be executed automatically during the install.    
+**github-updates.php**
+This file is optional, it will be executed on updates install, if missing, `$this->installUpdate()` method will be executed instead.    
+`$this->installUpdate()` simply copy base folders (modules, classes, templates) and files (ready.php, init.php and finished.php).
 
+**github-updates.php example**
+In this example we copy everything from repo /site/ folder to your processwire /site/ folder...     
+In /inc/ folder, you can create custom update scripts that will be executed automatically during the install.    
+```
 <?php
 /**
  *  Copy files from updates folder to template folder
