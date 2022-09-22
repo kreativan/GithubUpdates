@@ -88,7 +88,7 @@
   </a>
   <?php endif;?>
 
-  <a id="check-for-update" href="#" class="uk-button uk-button-secondary" onclick="runUpdateCheck()">
+  <a id="check-for-update" href="#" class="uk-button uk-button-default" onclick="runUpdateCheck()">
     <i class="fa fa-refresh uk-margin-small-right"></i>
     Check
   </a>
