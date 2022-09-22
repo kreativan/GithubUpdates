@@ -101,7 +101,7 @@ function checkForUpdates(download_url) {
 
       } else {
 
-        UIkit.modal.alert('<h2 class="uk-text-center uk-margin-remove">All Good!</h2><div class="uk-text-center">Framework is up to date.</div>');
+        UIkit.modal.alert('<h2 class="uk-text-center uk-margin-remove">All Good!</h2><div class="uk-text-center">Project is up to date.</div>');
 
       }
 
