@@ -45,29 +45,73 @@ class GithubUpdates extends Process {
       $this->session->redirect("./");
     }
 
-    //
-    //  Install updates
-    //
+    /**
+		 * Execute updates
+		 * If there is a 'github-updates.php' file in your repo root, it will be executed.
+		 * Otherwise it will run @method $this->installUpdate().
+		 */
     if($this->input->get->install_updates) {
-      $update_php = $this->updates_dir . "update.php";
-      if(file_exists($update_php)) include($update_php);
+      $update_php = $this->updates_dir . "github-updates.php";
+      if(file_exists($update_php)) {
+				include($update_php);
+			} else {
+				$this->installUpdate();
+				$this->session->redirect("./");
+			}
     }
 
   }
-
-
+	
+	//-------------------------------------------------------- 
+  //  installUpdate
+  //-------------------------------------------------------- 
+	
+	/**
+	 * This method will run on updates install (if github-updates.php is not detected) 
+	 * By default, files and folders defined in arrays, will be copied.
+	 * Feel free to modify the method to suit your needs...
+	 */
+	public function installUpdate() {
+		 if (!$this->isUpdateReady()) return;
+		
+		// Folders to be copied
+		$folders_arr = [
+      "{$this->updates_dir}modules/" => $this->config->paths->siteModules,
+      "{$this->updates_dir}templates/" => $this->config->paths->templates,
+      "{$this->updates_dir}classes/" => $this->config->paths->classes,
+    ];
+		
+		// Files to be copied
+		$folders_arr = [
+      "{$this->updates_dir}/ready.php" => $this->config->paths->site,
+      "{$this->updates_dir}/init.php" => $this->config->paths->site,
+      "{$this->updates_dir}/finished.php" => $this->config->paths->site,
+    ];
+		
+		// Copy folders
+    foreach($folders_arr as $from => $to) {
+      $this->files->copy($from, $to);
+    }
+		
+    // Copy files
+    foreach($files_arr as $from => $to) {
+      if(file_exists($from)) $this->files->copy($from, $to);
+    }
+		
+    // delete updates after install
+    $this->files->rmdir($this->updates_dir, true);
+		
+	}
+	
   //-------------------------------------------------------- 
   //  Methods
   //-------------------------------------------------------- 
-	public function vendor($field_name) {
+	public function vendor($field_name = "") {
 		$vendor_json = wire("config")->paths->templates . "vendor.json";
     $vendor_json_data = file_get_contents($vendor_json);
-    $vendor_data = json_decode($vendor_json_data, true);
-    if($field_name != "") {
-      return isset($data[$field_name]) && !empty($data[$field_name]) ? $data[$field_name] : false;
-    } else {
-      return $data;
-    }
+    $data = json_decode($vendor_json_data, true);
+    if(empty($field_name)) return $data;
+    return $data[$field_name];
 	}
 	
   public function needUpdate($current, $next) {
