@@ -117,9 +117,8 @@ class GithubUpdates extends Process {
   }
 
   public function isUpdateReady() {
-    $updates_file = $this->updates_dir . "update.php";
-    $json = $this->updates_dir . "site/templates/vendor.json";
-    if(!file_exists($updates_file) || !file_exists($json)) return false;
+    $json = $this->updates_dir . "vendor.json";
+    if(!file_exists($json)) return false;
     if($this->getUpdateInfo("version") <= $this->vendor_version) return false;
     return true;
   }
