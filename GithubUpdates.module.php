@@ -69,39 +69,36 @@ class GithubUpdates extends Process {
 	/**
 	 * This method will run on updates install (if github-updates.php is not detected) 
 	 * By default, files and folders defined in arrays, will be copied.
-	 * Feel free to modify the method to suit your needs...
+	 * Feel free to modify the method to suit your needs... but int his case its good to rename the module...
 	 */
-	public function installUpdate() {
-		 if (!$this->isUpdateReady()) return;
-		
-		// Folders to be copied
-		$folders_arr = [
+  public function installUpdate() {
+
+    if (!$this->isUpdateReady()) return;
+
+    $folders_arr = [
       "{$this->updates_dir}modules/" => $this->config->paths->siteModules,
       "{$this->updates_dir}templates/" => $this->config->paths->templates,
       "{$this->updates_dir}classes/" => $this->config->paths->classes,
     ];
-		
-		// Files to be copied
-		$folders_arr = [
+
+    $files_arr = [
       "{$this->updates_dir}/ready.php" => $this->config->paths->site,
       "{$this->updates_dir}/init.php" => $this->config->paths->site,
       "{$this->updates_dir}/finished.php" => $this->config->paths->site,
+      "{$this->updates_dir}/vendor.json" => $this->config->paths->site,
     ];
-		
-		// Copy folders
+    
+    // Copy folders
     foreach($folders_arr as $from => $to) {
       $this->files->copy($from, $to);
     }
-		
     // Copy files
     foreach($files_arr as $from => $to) {
       if(file_exists($from)) $this->files->copy($from, $to);
     }
-		
     // delete updates after install
     $this->files->rmdir($this->updates_dir, true);
-		
-	}
+  }
 	
   //-------------------------------------------------------- 
   //  Methods
