@@ -125,12 +125,14 @@ function updateError(error) {
  */
 function installUpdates() {
   event.preventDefault();
+	let cog = event.target.querySelector(".fa-cog");
+	if (cog) cog.classList.add("fa-spin"); 
   UIkit.modal.confirm(`<h2 class='uk-margin-small uk-text-center'>Install Updates?</h2>`)
     .then(function () {
-      let status_msg = document.querySelector("#ivm-status-message");
-      let check_msg = document.querySelector("#ivm-checking");
-      let download_msg = document.querySelector("#ivm-downloading");
-      let install_msg = document.querySelector("#ivm-installing");
+      let status_msg = document.querySelector("#wk-status-message");
+      let check_msg = document.querySelector("#wk-checking");
+      let download_msg = document.querySelector("#wk-downloading");
+      let install_msg = document.querySelector("#wk-installing");
       status_msg.classList.add("uk-hidden");
       check_msg.classList.add("uk-hidden");
       download_msg.classList.add("uk-hidden");
@@ -138,8 +140,10 @@ function installUpdates() {
       window.location = "./?install_updates=1";
     }, function () {
       console.log('Rejected.')
+			if (cog) cog.classList.remove("fa-spin"); 
     });
 }
+
 
 
 /**
