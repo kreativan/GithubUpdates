@@ -15,8 +15,8 @@ function runUpdateCheck() {
   let status_msg = document.querySelector("#ivm-status-message");
   let check_msg = document.querySelector("#ivm-checking");
 
-  if(status_msg) status_msg.classList.add("uk-hidden");
-  if(check_msg) check_msg.classList.remove("uk-hidden");
+  if (status_msg) status_msg.classList.add("uk-hidden");
+  if (check_msg) check_msg.classList.remove("uk-hidden");
 
   const config = ProcessWire.config.GithubUpdates;
   const github_repo_url = `https://api.github.com/repos/${config.user}/${config.repo}`;
@@ -133,10 +133,10 @@ function installUpdates() {
       let check_msg = document.querySelector("#wk-checking");
       let download_msg = document.querySelector("#wk-downloading");
       let install_msg = document.querySelector("#wk-installing");
-      if(status_msg) status_msg.classList.add("uk-hidden");
-      if(check_msg) check_msg.classList.add("uk-hidden");
-      if(download_msg) download_msg.classList.add("uk-hidden");
-      if(install_msg) install_msg.classList.remove("uk-hidden");
+      if (status_msg) status_msg.classList.add("uk-hidden");
+      if (check_msg) check_msg.classList.add("uk-hidden");
+      if (download_msg) download_msg.classList.add("uk-hidden");
+      if (install_msg) install_msg.classList.remove("uk-hidden");
       window.location = "./?install_updates=1";
     }, function () {
       console.log('Rejected.')
