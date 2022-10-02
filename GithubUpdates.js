@@ -10,13 +10,13 @@ function runUpdateCheck() {
   event.preventDefault();
 
   let icon = document.querySelector("#check-for-update .fa-refresh");
-  icon.classList.add("fa-spin");
+  if(icon) icon.classList.add("fa-spin");
 
   let status_msg = document.querySelector("#ivm-status-message");
   let check_msg = document.querySelector("#ivm-checking");
 
-  status_msg.classList.add("uk-hidden");
-  check_msg.classList.remove("uk-hidden");
+  if(status_msg) status_msg.classList.add("uk-hidden");
+  if(check_msg) check_msg.classList.remove("uk-hidden");
 
   const config = ProcessWire.config.GithubUpdates;
   const github_repo_url = `https://api.github.com/repos/${config.user}/${config.repo}`;
@@ -42,9 +42,9 @@ function runUpdateCheck() {
         checkForUpdates(data.download_url);
       }
 
-      icon.classList.remove("fa-spin");
-      status_msg.classList.remove("uk-hidden");
-      check_msg.classList.add("uk-hidden");
+      if(icon) icon.classList.remove("fa-spin");
+      if(status_msg) status_msg.classList.remove("uk-hidden");
+      if(check_msg) check_msg.classList.add("uk-hidden");
 
     })
     .catch((error) => {
@@ -133,17 +133,16 @@ function installUpdates() {
       let check_msg = document.querySelector("#wk-checking");
       let download_msg = document.querySelector("#wk-downloading");
       let install_msg = document.querySelector("#wk-installing");
-      status_msg.classList.add("uk-hidden");
-      check_msg.classList.add("uk-hidden");
-      download_msg.classList.add("uk-hidden");
-      install_msg.classList.remove("uk-hidden");
+      if(status_msg) status_msg.classList.add("uk-hidden");
+      if(check_msg) check_msg.classList.add("uk-hidden");
+      if(download_msg) download_msg.classList.add("uk-hidden");
+      if(install_msg) install_msg.classList.remove("uk-hidden");
       window.location = "./?install_updates=1";
     }, function () {
       console.log('Rejected.')
 			if (cog) cog.classList.remove("fa-spin"); 
     });
 }
-
 
 
 /**
